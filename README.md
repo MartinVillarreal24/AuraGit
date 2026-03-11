@@ -1,53 +1,78 @@
-# AI Auto-Commit Tool 🤖
+# Git AI: Mensajes de Commit Inteligentes 🤖💬
 
-Genera mensajes de commit profesionales automáticamente usando IA local (**Ollama**).
+**Git AI** es una herramienta de línea de comandos profesional diseñada para automatizar la generación de mensajes de commit utilizando Inteligencia Artificial local (Ollama) o proveedores en la nube (OpenAI, Gemini, Anthropic). 
 
-## 🚀 Requisitos Precios
+Eleva la calidad de tu historial de Git siguiendo la especificación de [Conventional Commits](https://www.conventionalcommits.org/) de manera automática y profesional.
 
-1. **Instalar Ollama**: Descárgalo en [ollama.com](https://ollama.com).
-2. **Descargar el Modelo**: Ejecuta `ollama pull qwen2.5-coder:7b`.
-3. **Mantener Ollama Abierto**: La herramienta se comunica con el servidor local de Ollama.
+## ✨ Características Principales
 
-## 🚀 Instalación Profesional (Uso Global)
+- **Multi-Proveedor**: Soporte listo para usar con:
+  - 🏠 **Ollama** (100% local, privacidad total).
+  - 🤖 **OpenAI** (GPT-4o, GPT-3.5).
+  - ♊ **Google Gemini** (1.5 Pro/Flash).
+  - 🅰️ **Anthropic** (Claude 3.5 Sonnet).
+- **Multi-Idioma**: Genera mensajes en **Español** o **Inglés** con un solo ajuste.
+- **Integración Nativa**: Se instala como un **Git Hook** (`prepare-commit-msg`), integrándose invisiblemente en tu flujo de trabajo.
+- **Configuración Global**: Define tus API Keys una vez en tu carpeta de usuario y úsalas en todos tus proyectos.
+- **Formato Profesional**: Genera títulos concisos y descripciones detalladas de los cambios técnicos.
 
-Para poder usar `git-ai` en **cualquier proyecto** de tu máquina, sigue estos pasos:
+---
 
-1.  **Instalación**:
-    Desde la carpeta de este proyecto, ejecuta:
-    ```bash
-    pip install .
-    ```
-    *(O `pip install -e .` si quieres seguir desarrollando).*
+## 🚀 Instalación Rápida
 
-2.  **Configuración Global**:
-    Crea una carpeta en tu usuario y copia el archivo `.env`:
-    - **Windows**: `C:\Users\tu_usuario\.git-ai\.env`
-    - **Linux/Mac**: `~/.git-ai/.env`
+### 1. Requisitos
+- Python 3.8 o superior.
+- (Opcional) [Ollama](https://ollama.com/) para ejecución 100% local.
 
-3.  **Uso en cualquier proyecto**:
-    Ve a cualquier repositorio de Git y activa la IA:
-    ```bash
-    git-ai install  # Instala el hook en ese proyecto
-    git-ai generate # Genera un commit manual
-    ```
+### 2. Instalación del Paquete
+Clona este repositorio y desde la raíz, ejecuta:
+```bash
+pip install .
+```
 
-Ahora el comando `git-ai` estará disponible en todo tu sistema.
+### 3. Configuración Global
+Para no tener que configurar cada proyecto, crea un archivo `.env` en la carpeta `.git-ai` de tu usuario:
 
-## ⚙️ Configuración (Multi-IA)
-Puedes alternar entre diferentes proveedores editando el archivo `.env`:
+- **Windows**: `C:\Users\TU_USUARIO\.git-ai\.env`
+- **macOS/Linux**: `~/.git-ai/.env`
 
-1.  **Ollama (Local)**:
-    - `AI_PROVIDER=ollama`
-    - Configura `OLLAMA_MODEL` (ej. `qwen2.5-coder:7b`).
-2.  **OpenAI**:
-    - `AI_PROVIDER=openai`
-    - Agrega tu `OPENAI_API_KEY`.
-3.  **Gemini**:
-    - `AI_PROVIDER=gemini`
-    - Agrega tu `GEMINI_API_KEY`.
-4.  **Anthropic (Claude)**:
-    - `AI_PROVIDER=anthropic`
-    - Agrega tu `ANTHROPIC_API_KEY`.
+Puedes usar el archivo `.env.example` de este repositorio como plantilla.
 
-Cada vez que ejecutes `python src/main.py generate`, la herramienta usará el proveedor configurado automáticamente.
+---
 
+## 📖 Modo de Uso
+
+### Uso como Git Hook (Recomendado)
+Activa la IA en cualquier repositorio de Git:
+```bash
+git-ai install
+```
+A partir de ahora, cada vez que hagas `git commit`, la IA analizará tus cambios y redactará el mensaje automáticamente.
+
+### Uso Manual
+Si prefieres generar el mensaje sin el hook:
+```bash
+git add .
+git-ai generate
+```
+
+---
+
+## ⚙️ Parámetros de Configuración
+
+Edita tu `.env` para personalizar la experiencia:
+
+| Variable | Descripción | Valores Ejemplo |
+|----------|-------------|-----------------|
+| `AI_PROVIDER` | Proveedor de IA activo | `ollama`, `openai`, `gemini`, `anthropic` |
+| `AI_LANGUAGE` | Idioma del mensaje | `es`, `en` |
+| `COMMIT_STYLE`| Estilo del commit | `conventional` |
+| `OPENAI_API_KEY`| Tu llave de OpenAI | `sk-...` |
+
+---
+
+## 📄 Licencia
+Este proyecto está bajo la licencia MIT. Siéntete libre de usarlo, modificarlo y compartirlo.
+
+---
+*Desarrollado con ❤️ para agilizar el flujo de trabajo de los desarrolladores.*

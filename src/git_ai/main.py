@@ -33,7 +33,8 @@ def install(repo):
 @cli.command()
 @click.option('--repo', default='.', help='Path to the git repository')
 @click.option('--hook', is_flag=True, help='Running as a git hook')
-def generate(repo, hook):
+@click.argument('msg_file', required=False)
+def generate(repo, hook, msg_file):
     """Generate a commit message based on staged changes"""
     try:
         gm = GitManager(repo)
@@ -61,8 +62,8 @@ def generate(repo, hook):
 
         if hook:
             # If running as a hook, we write to the commit message file
-            commit_msg_file = sys.argv[-1] # Usually the last arg in prepare-commit-msg
-            if os.path.exists(commit_msg_file):
+            commit_msg_file = msg_file
+            if commit_msg_file and os.path.exists(commit_msg_file):
                 with open(commit_msg_file, 'w') as f:
                     f.write(message)
                 console.print("[green]✔ Commit message generated and applied.[/green]")

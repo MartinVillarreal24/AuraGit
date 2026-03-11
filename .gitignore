@@ -1,17 +1,45 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
-.env
 
-# Context & DB
-.chroma_db/
+# C extensions
+*.so
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# sensitive files
+.env
+.env.local
+.env.*.local
 
 # IDEs
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS
-.DS_Store
-Thumbs.db
+# Project specific
+.chroma_db/
