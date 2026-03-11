@@ -8,33 +8,30 @@ Genera mensajes de commit profesionales automáticamente usando IA local (**Olla
 2. **Descargar el Modelo**: Ejecuta `ollama pull qwen2.5-coder:7b`.
 3. **Mantener Ollama Abierto**: La herramienta se comunica con el servidor local de Ollama.
 
-## 🛠️ Instalación
+## 🚀 Instalación Profesional (Uso Global)
 
-1. Clona este repositorio o copia los archivos.
-2. Crea el entorno virtual:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows: .\venv\Scripts\activate
-   ```
-3. Instala las dependencias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Instala el Hook de Git (opcional pero recomendado):
-   ```bash
-   python src/main.py install
-   ```
+Para poder usar `git-ai` en **cualquier proyecto** de tu máquina, sigue estos pasos:
 
-## 📖 Uso
+1.  **Instalación**:
+    Desde la carpeta de este proyecto, ejecuta:
+    ```bash
+    pip install .
+    ```
+    *(O `pip install -e .` si quieres seguir desarrollando).*
 
-### Generar Commit Manualmente
-Si tienes cambios en el stage (`git add .`), ejecuta:
-```bash
-python src/main.py generate
-```
+2.  **Configuración Global**:
+    Crea una carpeta en tu usuario y copia el archivo `.env`:
+    - **Windows**: `C:\Users\tu_usuario\.git-ai\.env`
+    - **Linux/Mac**: `~/.git-ai/.env`
 
-### Generar Commit Automáticamente (vía Hook)
-Si instalaste el hook, cada vez que ejecutes `git commit`, la herramienta analizará los cambios y escribirá el mensaje por ti.
+3.  **Uso en cualquier proyecto**:
+    Ve a cualquier repositorio de Git y activa la IA:
+    ```bash
+    git-ai install  # Instala el hook en ese proyecto
+    git-ai generate # Genera un commit manual
+    ```
+
+Ahora el comando `git-ai` estará disponible en todo tu sistema.
 
 ## ⚙️ Configuración (Multi-IA)
 Puedes alternar entre diferentes proveedores editando el archivo `.env`:
