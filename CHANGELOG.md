@@ -7,6 +7,15 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ## [No Lanzado]
 
+## [0.2.0] - 2026-03-11
+### Añadido
+- Nuevo sistema de memoria persistente (Engram) para mantener contexto entre sesiones.
+- Comando `git-ai memory save` para guardar decisiones, patrones y descubrimientos.
+- Comando `git-ai memory list` para visualizar los últimos engrams guardados.
+- Comando `git-ai memory search` para buscar engrams por palabra clave.
+### Cambiado
+- El comando `git-ai generate` ahora consulta automáticamente la memoria reciente para generar mensajes de commit más inteligentes y contextualizados.
+
 ## [0.1.4] - 2026-03-11
 ### Cambiado
 - Traducido el archivo `CHANGELOG.md` íntegramente al español.

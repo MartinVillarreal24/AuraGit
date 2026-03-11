@@ -3,9 +3,11 @@ import os
 import sys
 from rich.console import Console
 from rich.panel import Panel
+from rich.table import Table
 from git_ai.git_manager import GitManager
 from git_ai.ai_client import AIClientFactory
 from git_ai.config import Config, global_config_path
+from git_ai.memory import MemoryManager, Engram, VALID_TYPES
 import shutil
 from pathlib import Path
 
@@ -69,6 +71,75 @@ ANTHROPIC_API_KEY=
     except Exception as e:
         console.print(f"[red]Error initializing config: {str(e)}[/red]")
 
+@cli.group()
+def memory():
+    """Manage persistent memory (Engrams)"""
+    pass
+
+@memory.command(name="save")
+@click.option("--title", "-t", required=True, help="Short title for the engram (e.g., 'Implemented Login')")
+@click.option("--type", "-y", "engram_type", required=True, type=click.Choice(VALID_TYPES, case_sensitive=False), help="Type of engram")
+@click.option("--content", "-c", required=True, help="Content: What was done, Why, Where, Learned")
+def memory_save(title, engram_type, content):
+    """Save a new engram to persistent memory"""
+    try:
+        mm = MemoryManager()
+        engram = Engram(title=title, engram_type=engram_type, content=content)
+        filepath = mm.save(engram)
+        console.print(f"[green]✔ Engram saved: {filepath.name}[/green]")
+        console.print(Panel(f"[bold]{title}[/bold]\n[dim]{engram_type}[/dim]\n\n{content}", title="💾 Engram Saved", border_style="cyan"))
+    except Exception as e:
+        console.print(f"[red]Error saving engram: {str(e)}[/red]")
+
+@memory.command(name="list")
+@click.option("--limit", "-n", default=10, help="Number of engrams to show")
+def memory_list(limit):
+    """List recent engrams from memory"""
+    try:
+        mm = MemoryManager()
+        engrams = mm.list_engrams(limit=limit)
+        if not engrams:
+            console.print("[yellow]No engrams found. Use 'git-ai memory save' to create one.[/yellow]")
+            return
+
+        table = Table(title="🧠 Memory (Engrams)", border_style="cyan")
+        table.add_column("Timestamp", style="dim")
+        table.add_column("Type", style="magenta")
+        table.add_column("Title", style="bold")
+        table.add_column("Content", max_width=50)
+
+        for e in engrams:
+            ts = e.timestamp[:19] if e.timestamp else "N/A"
+            table.add_row(ts, e.engram_type, e.title, e.content[:50] + "..." if len(e.content) > 50 else e.content)
+
+        console.print(table)
+    except Exception as e:
+        console.print(f"[red]Error listing engrams: {str(e)}[/red]")
+
+@memory.command(name="search")
+@click.argument("query")
+@click.option("--limit", "-n", default=5, help="Max results")
+def memory_search(query, limit):
+    """Search engrams by keyword"""
+    try:
+        mm = MemoryManager()
+        results = mm.search(query, limit=limit)
+        if not results:
+            console.print(f"[yellow]No engrams found for '{query}'.[/yellow]")
+            return
+
+        table = Table(title=f"🔍 Search Results for '{query}'", border_style="cyan")
+        table.add_column("Type", style="magenta")
+        table.add_column("Title", style="bold")
+        table.add_column("Content", max_width=60)
+
+        for e in results:
+            table.add_row(e.engram_type, e.title, e.content[:60] + "..." if len(e.content) > 60 else e.content)
+
+        console.print(table)
+    except Exception as e:
+        console.print(f"[red]Error searching engrams: {str(e)}[/red]")
+
 @cli.command()
 @click.option('--repo', default='.', help='Path to the git repository')
 def install(repo):
@@ -109,7 +180,11 @@ def generate(repo, hook, msg_file):
             console.print(f"[red]Error: Could not connect to {Config.AI_PROVIDER}. Check your settings.[/red]")
             return
 
-        message = ai.generate_commit_message(diff)
+        # Include memory context for smarter generation
+        mm = MemoryManager()
+        context = mm.get_context(limit=3)
+
+        message = ai.generate_commit_message(diff, context=context)
 
         if hook:
             # If running as a hook, we write to the commit message file
