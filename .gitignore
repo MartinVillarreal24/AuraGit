@@ -43,6 +43,4 @@ ENV/
 
 # Project specific
 .chroma_db/
-.agents/
-skills-lock.json
 tests/
