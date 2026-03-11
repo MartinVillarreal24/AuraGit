@@ -3,7 +3,7 @@ import json
 import os
 from abc import ABC, abstractmethod
 from typing import Optional
-from config import Config
+from git_ai.config import Config
 
 class BaseAIProvider(ABC):
     @abstractmethod

@@ -3,9 +3,9 @@ import os
 import sys
 from rich.console import Console
 from rich.panel import Panel
-from git_manager import GitManager
-from ai_client import AIClientFactory
-from config import Config
+from git_ai.git_manager import GitManager
+from git_ai.ai_client import AIClientFactory
+from git_ai.config import Config
 
 console = Console()
 
@@ -24,8 +24,7 @@ def install(repo):
     """Install the git hook in the repository"""
     try:
         gm = GitManager(repo)
-        script_path = os.path.abspath(__file__)
-        gm.install_hook(script_path)
+        gm.install_hook(repo)
         console.print("[green]✔ Git hook installed successfully![/green]")
         console.print(f"[blue]Using AI Provider: {Config.AI_PROVIDER}[/blue]")
     except Exception as e:
@@ -33,7 +32,7 @@ def install(repo):
 
 @cli.command()
 @click.option('--repo', default='.', help='Path to the git repository')
-@click.option('--hook', is_flag=True, help='Running as a git hookk')
+@click.option('--hook', is_flag=True, help='Running as a git hook')
 def generate(repo, hook):
     """Generate a commit message based on staged changes"""
     try:

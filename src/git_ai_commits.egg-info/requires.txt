@@ -1,0 +1,8 @@
+GitPython
+requests
+click
+python-dotenv
+rich
+openai
+google-generativeai
+anthropic

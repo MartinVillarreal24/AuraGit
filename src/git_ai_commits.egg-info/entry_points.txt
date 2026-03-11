@@ -1,0 +1,2 @@
+[console_scripts]
+git-ai = git_ai.main:cli

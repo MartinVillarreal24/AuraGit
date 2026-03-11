@@ -1,7 +1,14 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
+# Load local .env if it exists
 load_dotenv()
+
+# Load global .env from home directory as fallback
+global_config_path = Path.home() / ".git-ai" / ".env"
+if global_config_path.exists():
+    load_dotenv(dotenv_path=global_config_path, override=False)
 
 class Config:
     # General Settings

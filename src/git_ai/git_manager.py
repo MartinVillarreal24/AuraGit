@@ -21,13 +21,13 @@ class GitManager:
         """Checks if there are any unstaged or staged changes."""
         return self.repo.is_dirty() or len(self.repo.index.diff("HEAD")) > 0
 
-    def install_hook(self, script_path: str):
-        """Installs the prepare-commit-msg hook."""
+    def install_hook(self, repo_path: str = "."):
+        """Installs the prepare-commit-msg hook using the global git-ai command."""
         hook_path = os.path.join(self.repo.git_dir, "hooks", "prepare-commit-msg")
         
         hook_content = f"""#!/bin/sh
-# AI Auto-Commit Hook
-python {os.path.abspath(script_path)} --hook $1
+# AI Auto-Commit Hook - Global Installation
+git-ai generate --repo "{os.path.abspath(repo_path)}" --hook $1
 """
         with open(hook_path, "w") as f:
             f.write(hook_content)
