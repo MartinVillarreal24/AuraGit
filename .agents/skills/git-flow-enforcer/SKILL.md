@@ -24,7 +24,7 @@ When a task results in a version bump:
 3. Every release must be tagged to maintain a visible history on GitHub.
 
 ### Changelog Maintenance
-Every change that affects the user or the codebase must be documented in `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+Every change that affects the user or the codebase must be documented in `CHANGELOG.md` in **SPANISH** following the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
 - Sections: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
 
 ### Merge Workflow
