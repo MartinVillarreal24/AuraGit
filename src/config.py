@@ -7,6 +7,7 @@ class Config:
     # General Settings
     AI_PROVIDER = os.getenv("AI_PROVIDER", "ollama").lower()  # ollama, openai, gemini, anthropic
     COMMIT_STYLE = os.getenv("COMMIT_STYLE", "conventional")
+    AI_LANGUAGE = os.getenv("AI_LANGUAGE", "en").lower()  # en, es
     
     # Ollama Settings
     OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
