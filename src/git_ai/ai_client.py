@@ -98,14 +98,17 @@ class OpenAIProvider(BaseAIProvider):
 
 class GeminiProvider(BaseAIProvider):
     def __init__(self):
-        import google.generativeai as genai
-        genai.configure(api_key=Config.GEMINI_API_KEY)
-        self.model = genai.GenerativeModel(Config.GEMINI_MODEL)
+        from google import genai
+        self.client = genai.Client(api_key=Config.GEMINI_API_KEY)
+        self.model = Config.GEMINI_MODEL
 
     def generate_commit_message(self, diff: str, context: str = "") -> str:
         try:
             prompt = f"{self._get_system_prompt()}\n\n{self._get_user_prompt(diff, context)}"
-            response = self.model.generate_content(prompt)
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=prompt
+            )
             return response.text.strip()
         except Exception as e:
             return f"Gemini Error: {str(e)}"
