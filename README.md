@@ -1,4 +1,4 @@
-# Git AI: Mensajes de Commit Inteligentes 🤖💬
+# AuraGit: Mensajes de Commit Inteligentes 🤖✨
 
 **Git AI** es una herramienta de línea de comandos profesional diseñada para automatizar la generación de mensajes de commit utilizando Inteligencia Artificial local (Ollama) o proveedores en la nube (OpenAI, Gemini, Anthropic). 
 
