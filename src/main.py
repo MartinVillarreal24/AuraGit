@@ -33,7 +33,7 @@ def install(repo):
 
 @cli.command()
 @click.option('--repo', default='.', help='Path to the git repository')
-@click.option('--hook', is_flag=True, help='Running as a git hook')
+@click.option('--hook', is_flag=True, help='Running as a git hookk')
 def generate(repo, hook):
     """Generate a commit message based on staged changes"""
     try:
