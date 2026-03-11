@@ -30,13 +30,15 @@ Clona este repositorio y desde la raíz, ejecuta:
 pip install .
 ```
 
-### 3. Configuración Global
-Para no tener que configurar cada proyecto, crea un archivo `.env` en la carpeta `.git-ai` de tu usuario:
+### 3. Configuración Global (Recomendado)
+Para automatizar la configuración inicial, ejecuta:
+```bash
+git-ai config init
+```
+Esto creará la carpeta `.git-ai` y un archivo `.env` en tu directorio de usuario. Luego, edita el archivo para añadir tus API Keys:
 
-- **Windows**: `C:\Users\TU_USUARIO\.git-ai\.env`
+- **Windows**: `%USERPROFILE%\.git-ai\.env`
 - **macOS/Linux**: `~/.git-ai/.env`
-
-Puedes usar el archivo `.env.example` de este repositorio como plantilla.
 
 ---
 
