@@ -1,0 +1,18 @@
+# Ruff configuration for AuraGit
+
+line-length = 100
+target-version = "py38"
+
+[lint]
+# Enable Pyflakes (F) and common bug-prevention rules
+select = ["F", "E", "W", "C90", "I", "N", "UP", "B", "A", "COM", "PT"]
+ignore = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
