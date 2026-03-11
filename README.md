@@ -71,6 +71,9 @@ Edita tu `.env` para personalizar la experiencia:
 
 ---
 
+## 🤝 Contribución
+¡Las contribuciones son bienvenidas! Consulta nuestra [Guía de Contribución](CONTRIBUTING.md) para más detalles sobre cómo empezar.
+
 ## 📄 Licencia
 Este proyecto está bajo la licencia MIT. Siéntete libre de usarlo, modificarlo y compartirlo.
 
