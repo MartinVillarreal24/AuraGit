@@ -4,8 +4,5 @@ click
 python-dotenv
 rich
 openai
-google-generativeai
+google-genai
 anthropic
-langchain-openai
-langchain-google-genai
-langchain-anthropic

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "auragit"
-version = "0.1.1"
+version = "0.1.2"
 description = "AuraGit: Generador profesional de commits con IA. Automatiza tu flujo Git con mensajes inteligentes (Conventional Commits). Soporte para Ollama, OpenAI, Gemini y Claude. Integración como Git Hook y soporte multi-idioma."
 authors = [
     { name = "Martin Villarreal" }
@@ -16,7 +16,7 @@ dependencies = [
     "python-dotenv",
     "rich",
     "openai",
-    "google-generativeai",
+    "google-genai",
     "anthropic",
 ]
 requires-python = ">=3.8"
