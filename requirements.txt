@@ -1,0 +1,11 @@
+GitPython
+requests
+click
+python-dotenv
+rich
+openai
+google-generativeai
+anthropic
+langchain-openai
+langchain-google-genai
+langchain-anthropic
